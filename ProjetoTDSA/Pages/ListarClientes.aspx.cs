@@ -16,7 +16,6 @@ namespace ProjetoTDSA.Pages
             }
         }
 
-        // Método para carregar a lista de clientes no GridView
         private void CarregarClientes()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -40,6 +39,8 @@ namespace ProjetoTDSA.Pages
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             int id = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value);
+
+            ClientScript.RegisterStartupScript(this.GetType(), "confirm", "if(!confirm('Tem certeza que deseja excluir este cliente?')) return;", true);
 
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             using (SqlConnection con = new SqlConnection(connectionString))

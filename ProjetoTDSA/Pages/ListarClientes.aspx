@@ -1,10 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ListarClientes.aspx.cs" Inherits="ProjetoTDSA.Pages.ListarClientes" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Listar Clientes</title>
+    <script type="text/javascript">
+        function confirmarExclusao() {
+            return confirm("Tem certeza que deseja excluir este cliente?");
+        }
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -19,8 +23,12 @@
                     <asp:BoundField DataField="CLI_NOME" HeaderText="Nome" />
                     <asp:BoundField DataField="CLI_DATANASCIMENTO" HeaderText="Data de Nascimento" />
                     <asp:BoundField DataField="CLI_ATIVO" HeaderText="Ativo" />
-                    
-                    <asp:CommandField ShowDeleteButton="True" />
+
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Button ID="btnExcluir" runat="server" Text="Excluir" CommandName="Delete" OnClientClick="return confirmarExclusao();" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
                 </Columns>
             </asp:GridView>
         </div>
